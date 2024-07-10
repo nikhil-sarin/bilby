@@ -3,6 +3,7 @@ import inspect
 import os
 import sys
 import time
+import warnings
 
 import numpy as np
 from pandas import DataFrame
@@ -678,7 +679,6 @@ class Dynesty(NestedSampler):
         restarting the sampler.
         """
 
-        import warnings
         logger.debug("Running sampler with checkpointing")
 
         old_ncall = self.sampler.ncall
