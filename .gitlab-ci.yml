@@ -143,7 +143,7 @@ python-3.10:
   needs: ["basic-3.10"]
   image: containers.ligo.org/lscsoft/bilby/v2-bilby-python310
 
-python-3.11
+python-3.11:
   <<: *unit-test
   needs: ["basic-3.11", "precommits-py3.11"]
   image: containers.ligo.org/lscsoft/bilby/v2-bilby-python311
@@ -174,12 +174,12 @@ python-3.12:
 
 python-3.10-samplers:
   <<: *test-sampler
-  needs: ["basic-3.10", "precommits-py3.10"]
+  needs: ["basic-3.10"]
   image: containers.ligo.org/lscsoft/bilby/v2-bilby-python310
 
 python-3.11-samplers:
   <<: *test-sampler
-  needs: ["basic-3.11"]
+  needs: ["basic-3.11", "precommits-py3.11"]
   image: containers.ligo.org/lscsoft/bilby/v2-bilby-python311
 
 python-3.12-samplers:
