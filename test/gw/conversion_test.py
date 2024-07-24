@@ -377,6 +377,43 @@ class TestConvertToLALParams(unittest.TestCase):
     def test_lambda_1(self):
         self._conversion_to_component_tidal(["lambda_1"])
 
+    def test_transform_precessing_spins_float_returns_float():
+        import lal
+        args = dict(
+            theta_jn=0.2,
+            phi_jl=3.0,
+            tilt_1=2.9,
+            tilt_2=2.0,
+            phi_12=1.3,
+            a_1=0.5,
+            a_2=0.4,
+            mass_1=30 * lal.MSUN_SI,
+            mass_2=30 * lal.MSUN_SI,
+            reference_frequency=20.0,
+            phase=0.1,
+        )
+        result = bilby_to_lalsimulation_spins(*args)
+        for value in result:
+            assert isinstance(value, float)
+
+    def test_transform_precessing_spins_array_returns_array():
+        import lal
+        args = dict(
+            theta_jn=np.array([0.2] * 5),
+            phi_jl=np.array([3.0] * 5),
+            tilt_1=np.array([2.9] * 5),
+            tilt_2=np.array([2.0] * 5),
+            phi_12=np.array([1.3] * 5),
+            a_1=np.array([0.5] * 5),
+            a_2=np.array([0.4] * 5),
+            mass_1=np.array([30 * lal.MSUN_SI] * 5),
+            mass_2=np.array([30 * lal.MSUN_SI] * 5),
+            reference_frequency=20.0,
+            phase=np.array([0.1] * 5),
+        )
+        result = bilby_to_lalsimulation_spins(*args)
+        for value in result:
+            assert isinstance(value, np.ndarray)
 
 class TestGenerateAllParameters(unittest.TestCase):
     def setUp(self):
